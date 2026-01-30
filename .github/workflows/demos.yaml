@@ -1,0 +1,17 @@
+name: Sample GitHub Action
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run a shell command
+        run: echo "Hello from GitHub Actions!"
