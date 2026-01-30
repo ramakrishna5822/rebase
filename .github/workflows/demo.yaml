@@ -1,0 +1,47 @@
+name: CI Pipeline Full Example
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code from repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up environment
+      - name: Set up environment
+        run: |
+          echo "Setting up environment"
+          uname -a
+          pwd
+
+      # Step 3: Run build step
+      - name: Build project
+        run: |
+          echo "Building project..."
+          mkdir build
+          echo "Build successful" > build/result.txt
+
+      # Step 4: Run tests
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          if [ -f build/result.txt ]; then
+            echo "Tests passed"
+          else
+            echo "Tests failed"
+            exit 1
+          fi
+
+      # Step 5: Finish job
+      - name: Job completed
+        run: echo "CI Pipeline finished successfully"
